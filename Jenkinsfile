@@ -4,8 +4,8 @@ pipeline {
   stages {
     stage('Checkout OK') {
       steps {
-        sh 'echo "Repo GitHub collegato correttamente"'
-        sh 'ls -la'
+        bat 'echo "Repo GitHub collegato correttamente"'
+        bat 'dir'
       }
     }
   }
