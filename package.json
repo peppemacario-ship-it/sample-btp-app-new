@@ -1,0 +1,15 @@
+{
+  "name": "sample-btp-app",
+  "version": "1.0.0",
+  "description": "Sample Node.js app deployed on SAP BTP via Jenkins",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
