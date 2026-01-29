@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     CF_API = 'https://api.cf.eu10.hana.ondemand.com'
-    CF_ORG = '2345977etrial'
+    CF_ORG = 'trial'
     CF_SPACE = 'dev'
   }
 
