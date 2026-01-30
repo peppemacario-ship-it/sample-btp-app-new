@@ -3,8 +3,8 @@ pipeline {
 
   environment {
     APP_NAME = 'sample-btp-app'
-    CF_API = 'https://api.cf.us10-001.hana.ondemand.com/'
-    CF_ORG = '2345977etrial'
+    CF_API = 'https://api.cf.us10-001.hana.ondemand.com'
+    CF_ORG = '2345977etrial'   
     CF_SPACE = 'dev'
 
     MAJOR = '1'
@@ -13,6 +13,7 @@ pipeline {
   }
 
   stages {
+
     stage('Checkout') {
       steps {
         checkout scm
@@ -48,25 +49,26 @@ pipeline {
         """
       }
     }
-  
-  	stage('Git Tag') {
+
+    stage('Git Tag') {
       steps {
         withCredentials([usernamePassword(
           credentialsId: 'github-pat',
           usernameVariable: 'GIT_USER',
           passwordVariable: 'GIT_PAT'
-       )]) {
-         bat """
-          git config user.email "jenkins@local"
-          git config user.name "Jenkins"
+        )]) {
+          bat """
+            git config user.email "jenkins@local"
+            git config user.name "Jenkins"
 
-          git tag v${VERSION}
-
-          git push https://%GIT_USER%:%GIT_PAT%@github.com/peppemacario-ship-it/sample-btp-app-new.git v${VERSION}
-      """
+            git tag v%VERSION%
+            git push https://%GIT_USER%:%GIT_PAT%@github.com/peppemacario-ship-it/sample-btp-app-new.git v%VERSION%
+          """
+        }
+      }
     }
+
   }
-}
 
   post {
     success {
