@@ -50,13 +50,22 @@ pipeline {
     }
   
   	stage('Git Tag') {
-	    steps {
-		    bat """
-		      git tag v${VERSION}
-		      git push origin v${VERSION}
-		    """
-      }
+      steps {
+        withCredentials([usernamePassword(
+          credentialsId: 'github-pat',
+          usernameVariable: 'GIT_USER',
+          passwordVariable: 'GIT_PAT'
+       )]) {
+         bat """
+          git config user.email "jenkins@local"
+          git config user.name "Jenkins"
+
+          git tag v${VERSION}
+
+          git push https://%GIT_USER%:%GIT_PAT%@github.com/peppemacario-ship-it/sample-btp-app-new.git v${VERSION}
+      """
     }
+  }
 }
 
   post {
