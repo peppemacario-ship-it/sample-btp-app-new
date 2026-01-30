@@ -48,7 +48,16 @@ pipeline {
         """
       }
     }
-  }
+  
+  	stage('Git Tag') {
+	    steps {
+		    bat """
+		      git tag v${VERSION}
+		      git push origin v${VERSION}
+		    """
+      }
+    }
+}
 
   post {
     success {

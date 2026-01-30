@@ -4,5 +4,4 @@ applications:
   instances: 1
   buildpacks:
     - nodejs_buildpack
-  env:
-    APP_VERSION: ((APP_VERSION))    
+###
