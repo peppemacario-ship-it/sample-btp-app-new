@@ -35,7 +35,7 @@ pipeline {
     stage('Semantic Release') {
       steps {
         withCredentials([string(
-          credentialsId: 'github-pat',
+          credentialsId: 'github-token',
           variable: 'GITHUB_TOKEN'
         )]) {
           bat 'npx semantic-release'
