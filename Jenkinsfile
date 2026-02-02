@@ -6,7 +6,6 @@ pipeline {
     CF_API = 'https://api.cf.us10-001.hana.ondemand.com'
     CF_ORG = '2345977etrial'   
     CF_SPACE = 'dev'
-	NODE_ENV = 'production'
   }
 
   stages {
@@ -31,6 +30,7 @@ pipeline {
         bat 'npm install'
       }
     }
+    
 
     stage('Semantic Release') {
       steps {
