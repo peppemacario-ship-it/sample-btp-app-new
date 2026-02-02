@@ -62,6 +62,7 @@ pipeline {
     stage('Deploy to SAP BTP') {
       steps {
         bat '''
+          git fetch --tags
           for /f %%i in ('git describe --tags --abbrev=0') do set APP_VERSION=%%i
           cf push %APP_NAME% --var APP_VERSION=%APP_VERSION%
         '''
