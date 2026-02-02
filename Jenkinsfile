@@ -6,10 +6,7 @@ pipeline {
     CF_API = 'https://api.cf.us10-001.hana.ondemand.com'
     CF_ORG = '2345977etrial'   
     CF_SPACE = 'dev'
-
-    MAJOR = '1'
-    MINOR = '0'
-    VERSION = "${MAJOR}.${MINOR}.${BUILD_NUMBER}"
+	NODE_ENV = 'production'
   }
 
   stages {
@@ -20,9 +17,20 @@ pipeline {
       }
     }
 
-    stage('Show Version') {
+    stage('Install Dependencies') {
       steps {
-        echo "🚀 Deploying version ${VERSION}"
+        bat 'npm install'
+      }
+    }
+
+    stage('Semantic Release') {
+      steps {
+        withCredentials([string(
+          credentialsId: 'github-pat',
+          variable: 'GITHUB_TOKEN'
+        )]) {
+          bat 'npx semantic-release'
+        }
       }
     }
 
@@ -44,35 +52,17 @@ pipeline {
 
     stage('Deploy to SAP BTP') {
       steps {
-        bat """
-          cf push ${APP_NAME} --var APP_VERSION=${VERSION}
-        """
+        bat '''
+          for /f %%i in ('git describe --tags --abbrev=0') do set APP_VERSION=%%i
+          cf push %APP_NAME% --var APP_VERSION=%APP_VERSION%
+        '''
       }
     }
-
-    stage('Git Tag') {
-      steps {
-        withCredentials([usernamePassword(
-          credentialsId: 'github-pat',
-          usernameVariable: 'GIT_USER',
-          passwordVariable: 'GIT_PAT'
-        )]) {
-          bat """
-            git config user.email "jenkins@local"
-            git config user.name "Jenkins"
-
-            git tag v%VERSION%
-            git push https://%GIT_USER%:%GIT_PAT%@github.com/peppemacario-ship-it/sample-btp-app-new.git v%VERSION%
-          """
-        }
-      }
-    }
-
   }
 
   post {
     success {
-      echo "✅ Deployed version ${VERSION}"
+      echo "✅ Release, tag e deploy completati"
     }
   }
 }
