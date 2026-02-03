@@ -31,7 +31,7 @@ pipeline {
       steps {
         script {
           def msg = bat(
-            script: 'git log -1 --pretty=%B',
+            script: 'git log -1 --pretty=%%B',
             returnStdout: true
           ).trim()
 
