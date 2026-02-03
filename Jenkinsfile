@@ -75,7 +75,7 @@ pipeline {
           bat 'git fetch --tags'
           
           def version = bat(
-            script: 'git describe --tags --abbrev=0'         
+            script: 'git describe --tags --abbrev=0',         
             returnStdout: true
           ).trim()
 
