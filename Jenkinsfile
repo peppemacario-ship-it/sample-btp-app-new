@@ -48,11 +48,15 @@ pipeline {
           credentialsId: 'github-token',
           variable: 'GITHUB_TOKEN'
         )]) {
-          bat 'npx semantic-release'
+          withEnv([
+            'CI=true',
+            'BRANCH_NAME=main'
+          ]) {
+            bat 'npx semantic-release'
+          }
         }
       }
     }
-
     stage('Login to SAP BTP CF') {
       steps {
         withCredentials([usernamePassword(
