@@ -35,7 +35,6 @@ pipeline {
       }
     }
     
-
     stage('Semantic Release') {
       steps {
         withCredentials([string(
@@ -63,15 +62,25 @@ pipeline {
       }
     }
 
+    stage('Resolve Version') {
+      steps {
+        script {
+          def version = bat(
+            script: 'git fetch --tags & git describe --tags --abbrev=0',
+            returnStdout: true
+          ).trim()
+
+          env.APP_VERSION = version
+          echo "🚀 Deploying version ${env.APP_VERSION}"
+        }
+      }
+    }
+
     stage('Deploy to SAP BTP') {
       steps {
-        bat '''
-          setlocal EnableDelayedExpansion
-          git fetch --tags
-          for /f %%i in ('git describe --tags --abbrev=0') do set APP_VERSION=%%i
-          echo Deploying version !APP_VERSION!
-          cf push %APP_NAME% --var APP_VERSION=!APP_VERSION!
-        '''
+          bat """
+            cf push %APP_NAME% --var APP_VERSION=%APP_VERSION%
+    """
       }
     }
   }
