@@ -72,10 +72,11 @@ pipeline {
     stage('Resolve Version') {
       steps {
         script {
-          bat 'git fetch --tags'
-          
-          def version = bat(
-            script: 'git describe --tags --abbrev=0',         
+          def version = powershell(
+            script: '''
+             git fetch --tags
+             git describe --tags --abbrev=0         
+            ''',
             returnStdout: true
           ).trim()
 
@@ -87,9 +88,9 @@ pipeline {
 
     stage('Deploy to SAP BTP') {
       steps {
-          bat """
-            cf push %APP_NAME% --var APP_VERSION=%APP_VERSION%
-    """
+        bat """
+          cf push %APP_NAME% --var APP_VERSION=%APP_VERSION%
+        """
       }
     }
   }
