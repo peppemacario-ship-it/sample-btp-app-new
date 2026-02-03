@@ -16,9 +16,16 @@ pipeline {
 
     stage('Checkout') {
       steps {
-        checkout scm
-      }
-    }
+         checkout([
+           $class: 'GitSCM',
+           branches: [[name: '*/main']],
+           userRemoteConfigs: [[
+             url: 'https://github.com/peppemacario-ship-it/sample-btp-app-new.git',
+             credentialsId: 'github-pat'
+      ]]
+    ])
+  }
+}
 
     stage('Check Node') {
       steps {
@@ -65,8 +72,10 @@ pipeline {
     stage('Resolve Version') {
       steps {
         script {
+          bat 'git fetch --tags'
+          
           def version = bat(
-            script: 'git fetch --tags & git describe --tags --abbrev=0',
+            script: 'git describe --tags --abbrev=0'         
             returnStdout: true
           ).trim()
 
