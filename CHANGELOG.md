@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.2...v1.1.3) (2026-02-03)
+
+
+### Bug Fixes
+
+* add check commit ([d5421b9](https://github.com/peppemacario-ship-it/sample-btp-app-new/commit/d5421b921ee6cf315cd8da7409476480499cc85d))
+* update script for check commit ([9c406f5](https://github.com/peppemacario-ship-it/sample-btp-app-new/commit/9c406f5e306e46cced1f1c281e65077e8d4980c3))
+
 ## [1.1.2](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.1...v1.1.2) (2026-02-03)
 
 
