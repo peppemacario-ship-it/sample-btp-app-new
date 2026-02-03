@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.0...v1.1.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* add comment ([8395121](https://github.com/peppemacario-ship-it/sample-btp-app-new/commit/83951217130f2c958b3507713590e01f63cb05d5))
+
 # [1.1.0](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.0.17...v1.1.0) (2026-02-03)
 
 
