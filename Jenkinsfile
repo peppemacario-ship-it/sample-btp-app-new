@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  options {
+    skipDefaultCheckout(true)
+  }
+
   environment {
     APP_NAME = 'sample-btp-app'
     CF_API = 'https://api.cf.us10-001.hana.ondemand.com'
