@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.5...v1.1.6) (2026-02-03)
+
+
+### Bug Fixes
+
+* ingnore parallel build ([501bb3f](https://github.com/peppemacario-ship-it/sample-btp-app-new/commit/501bb3f1272daaa4f2ab18a9418d647e8754e30b))
+
 ## [1.1.5](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.4...v1.1.5) (2026-02-03)
 
 
