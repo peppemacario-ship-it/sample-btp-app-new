@@ -27,6 +27,25 @@ pipeline {
   }
 }
 
+    stage('Check commit message') {
+      steps {
+        script {
+          def msg = bat(
+            script: 'git log -1 --pretty=%B',
+            returnStdout: true
+          ).trim()
+
+          echo "📝 Last commit message: ${msg}"
+
+          if (msg.startsWith('chore(release):')) {
+            echo '🚫 Release commit detected → stopping pipeline'
+            currentBuild.result = 'SUCCESS'
+            return
+          }
+        }
+      }
+    }
+
     stage('Check Node') {
       steps {
         bat '''
