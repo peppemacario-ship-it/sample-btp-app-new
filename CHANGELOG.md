@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.8...v1.1.9) (2026-02-05)
+
+
+### Bug Fixes
+
+* upd manifest ([41b9011](https://github.com/peppemacario-ship-it/sample-btp-app-new/commit/41b901120c227bbb85980bc58c300d4c472bed18))
+
 ## [1.1.8](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.7...v1.1.8) (2026-02-05)
 
 
