@@ -44,6 +44,7 @@ pipeline {
     stage('Install Dependencies') {
       steps {
         bat 'npm install'
+        bat 'npm install --save-dev conventional-changelog-conventionalcommits'
       }
     }
     
@@ -62,7 +63,7 @@ pipeline {
         }
       }
     }
-    
+
     stage('Login to SAP BTP CF') {
       steps {
         withCredentials([usernamePassword(
