@@ -3,7 +3,6 @@ pipeline {
 
   options {
     skipDefaultCheckout(true)
-    disableConcurrentBuilds()
     
   }
 
@@ -38,24 +37,9 @@ pipeline {
           ).trim()
 
           echo "📝 Last commit message: ${msg}"
-
-          if (msg.startsWith('chore(release):')) {
-            echo '🚫 Release commit detected → stopping pipeline'
-            currentBuild.result = 'SUCCESS'
-            return
-          }
         }
       }
     }
-
-    stage('Check Node') {
-      steps {
-        bat '''
-      node -v
-      npm -v
-    '''
-  }
-}
 
     stage('Install Dependencies') {
       steps {
@@ -78,6 +62,7 @@ pipeline {
         }
       }
     }
+    
     stage('Login to SAP BTP CF') {
       steps {
         withCredentials([usernamePassword(
