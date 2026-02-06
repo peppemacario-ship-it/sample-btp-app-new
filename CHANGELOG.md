@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v2.0.0...v2.1.0) (2026-02-06)
+
+
+### Features
+
+* delete if in check commit stage ([7b817af](https://github.com/peppemacario-ship-it/sample-btp-app-new/commit/7b817afbc93c0e78c74d9a30a4b68318e7e3cf36))
+
 # [2.0.0](https://github.com/peppemacario-ship-it/sample-btp-app-new/compare/v1.1.9...v2.0.0) (2026-02-05)
 
 
