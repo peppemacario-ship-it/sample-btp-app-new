@@ -1,8 +1,13 @@
 {
-  "name": "sample-btp-app",
+  "name": "@peppemacario-ship-it/sample-btp-app",
   "version": "1.0.0",
   "description": "Sample Node.js app deployed on SAP BTP via Jenkins",
   "main": "server.js",
+
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+
   "scripts": {
     "start": "node server.js",
     "semantic-release": "semantic-release"

@@ -11,6 +11,7 @@ pipeline {
     CF_API = 'https://api.cf.us10-001.hana.ondemand.com'
     CF_ORG = '2345977etrial'   
     CF_SPACE = 'dev'
+    NPM_REGISTRY = 'https://npm.pkg.github.com/'
   }
 
   stages {
@@ -28,27 +29,13 @@ pipeline {
   }
 }
 
-    stage('Check commit message') {
-      steps {
-        script {
-          def msg = bat(
-            script: 'git log -1 --pretty=%%B',
-            returnStdout: true
-          ).trim()
 
-          echo "📝 Last commit message: ${msg}"
-        }
-      }
-    }
-
-    stage('Install Dependencies') {
+  stage('Install Dependencies') {
       steps {
-        bat 'npm install'
-        bat 'npm install --save-dev conventional-changelog-conventionalcommits'
-      }
+        bat 'npm ci'
     }
     
-    stage('Semantic Release') {
+    stage('Semantic Release & Publish to GitHub Packages') {
       steps {
         withCredentials([string(
           credentialsId: 'github-token',
@@ -56,9 +43,12 @@ pipeline {
         )]) {
           withEnv([
             'CI=true',
-            'BRANCH_NAME=main'
+            'NPM_TOKEN=' + GITHUB_TOKEN
           ]) {
-            bat 'npx semantic-release'
+            bat '''
+              echo //npm.pkg.github.com/:_authToken=%NPM_TOKEN% > .npmrc
+              npx semantic-release
+            ''' 
           }
         }
       }
@@ -80,7 +70,7 @@ pipeline {
       }
     }
 
-    stage('Resolve Version') {
+    stage('Resolve Version From Tag') {
       steps {
         script {
           def version = powershell(
